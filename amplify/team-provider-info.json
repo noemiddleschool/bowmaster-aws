@@ -14,6 +14,9 @@
     "categories": {
       "api": {
         "bowmaster": {}
+      },
+      "auth": {
+        "bowmaster36fc2d49": {}
       }
     }
   }
