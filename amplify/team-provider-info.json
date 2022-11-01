@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bowmaster-dev-131356-authRole",
+      "UnauthRoleArn": "arn:aws:iam::974848205520:role/amplify-bowmaster-dev-131356-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::974848205520:role/amplify-bowmaster-dev-131356-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bowmaster-dev-131356-deployment",
+      "UnauthRoleName": "amplify-bowmaster-dev-131356-unauthRole",
+      "StackName": "amplify-bowmaster-dev-131356",
+      "StackId": "arn:aws:cloudformation:us-east-1:974848205520:stack/amplify-bowmaster-dev-131356/9294b1d0-5a08-11ed-a70d-0e1b69c0693b",
+      "AmplifyAppId": "d1ivb4srxw8ops"
+    },
+    "categories": {
+      "api": {
+        "bowmaster": {}
+      }
+    }
+  }
+}
