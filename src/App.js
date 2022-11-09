@@ -15,6 +15,9 @@ const App = ({ signOut, user }) => {
       <Heading level={4}>Welcome, {user.username}</Heading>
       <Button onClick={signOut}>Sign out</Button>
       <Heading level={1}>Welcome to BowMaster v1</Heading>
+      <p>
+       Get Ready
+      </p>
     </div>
   );
 }
