@@ -15,8 +15,14 @@ const App = ({ signOut, user }) => {
       <Heading level={4}>Welcome, {user.username}</Heading>
       <Button onClick={signOut}>Sign out</Button>
       <Heading level={1}>Welcome to BowMaster v1</Heading>
+      <br></br>
+      <Heading level={3}>Current Equipment Listing</Heading>
       <p>
-       Get Ready
+       Sample data of equipment matching profile requirements
+      </p>
+      <Heading level={3}>Current Active Sessions</Heading>
+      <p>
+        Sample data from active session
       </p>
     </div>
   );
