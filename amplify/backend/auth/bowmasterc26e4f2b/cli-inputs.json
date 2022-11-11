@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "bowmaster36fc2d49_identitypool_36fc2d49",
+    "identityPoolName": "bowmasterc26e4f2b_identitypool_c26e4f2b",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "bowmas36fc2d49",
-    "userPoolName": "bowmaster36fc2d49_userpool_36fc2d49",
+    "resourceNameTruncated": "bowmasc26e4f2b",
+    "userPoolName": "bowmasterc26e4f2b_userpool_c26e4f2b",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -19,7 +19,9 @@
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
-    "requiredAttributes": [],
+    "requiredAttributes": [
+      "email"
+    ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
@@ -29,10 +31,10 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "bowmas36fc2d49_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "bowmasc26e4f2b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "36fc2d49",
-    "resourceName": "bowmaster36fc2d49",
+    "sharedId": "c26e4f2b",
+    "resourceName": "bowmasterc26e4f2b",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "triggers": {},

@@ -1,18 +1,22 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateBlog = /* GraphQL */ `
-  subscription OnCreateBlog($filter: ModelSubscriptionBlogFilterInput) {
-    onCreateBlog(filter: $filter) {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+    onCreateUser(filter: $filter) {
       id
-      name
-      posts {
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
         items {
           id
-          title
+          starttime
           createdAt
           updatedAt
-          blogPostsId
+          userSessionsId
         }
         nextToken
       }
@@ -21,18 +25,22 @@ export const onCreateBlog = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateBlog = /* GraphQL */ `
-  subscription OnUpdateBlog($filter: ModelSubscriptionBlogFilterInput) {
-    onUpdateBlog(filter: $filter) {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+    onUpdateUser(filter: $filter) {
       id
-      name
-      posts {
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
         items {
           id
-          title
+          starttime
           createdAt
           updatedAt
-          blogPostsId
+          userSessionsId
         }
         nextToken
       }
@@ -41,18 +49,22 @@ export const onUpdateBlog = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteBlog = /* GraphQL */ `
-  subscription OnDeleteBlog($filter: ModelSubscriptionBlogFilterInput) {
-    onDeleteBlog(filter: $filter) {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+    onDeleteUser(filter: $filter) {
       id
-      name
-      posts {
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
         items {
           id
-          title
+          starttime
           createdAt
           updatedAt
-          blogPostsId
+          userSessionsId
         }
         nextToken
       }
@@ -61,174 +73,75 @@ export const onDeleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost($filter: ModelSubscriptionPostFilterInput) {
-    onCreatePost(filter: $filter) {
+export const onCreateSession = /* GraphQL */ `
+  subscription OnCreateSession($filter: ModelSubscriptionSessionFilterInput) {
+    onCreateSession(filter: $filter) {
       id
-      title
-      blog {
+      starttime
+      user {
         id
-        name
-        posts {
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      blogPostsId
+      userSessionsId
     }
   }
 `;
-export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost($filter: ModelSubscriptionPostFilterInput) {
-    onUpdatePost(filter: $filter) {
+export const onUpdateSession = /* GraphQL */ `
+  subscription OnUpdateSession($filter: ModelSubscriptionSessionFilterInput) {
+    onUpdateSession(filter: $filter) {
       id
-      title
-      blog {
+      starttime
+      user {
         id
-        name
-        posts {
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      blogPostsId
+      userSessionsId
     }
   }
 `;
-export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost($filter: ModelSubscriptionPostFilterInput) {
-    onDeletePost(filter: $filter) {
+export const onDeleteSession = /* GraphQL */ `
+  subscription OnDeleteSession($filter: ModelSubscriptionSessionFilterInput) {
+    onDeleteSession(filter: $filter) {
       id
-      title
-      blog {
+      starttime
+      user {
         id
-        name
-        posts {
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      blogPostsId
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
-    onCreateComment(filter: $filter) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      postCommentsId
-    }
-  }
-`;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment($filter: ModelSubscriptionCommentFilterInput) {
-    onUpdateComment(filter: $filter) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      postCommentsId
-    }
-  }
-`;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment($filter: ModelSubscriptionCommentFilterInput) {
-    onDeleteComment(filter: $filter) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      postCommentsId
+      userSessionsId
     }
   }
 `;

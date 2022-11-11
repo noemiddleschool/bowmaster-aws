@@ -1,21 +1,25 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBlog = /* GraphQL */ `
-  mutation CreateBlog(
-    $input: CreateBlogInput!
-    $condition: ModelBlogConditionInput
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    createBlog(input: $input, condition: $condition) {
+    createUser(input: $input, condition: $condition) {
       id
-      name
-      posts {
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
         items {
           id
-          title
+          starttime
           createdAt
           updatedAt
-          blogPostsId
+          userSessionsId
         }
         nextToken
       }
@@ -24,21 +28,25 @@ export const createBlog = /* GraphQL */ `
     }
   }
 `;
-export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog(
-    $input: UpdateBlogInput!
-    $condition: ModelBlogConditionInput
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    updateBlog(input: $input, condition: $condition) {
+    updateUser(input: $input, condition: $condition) {
       id
-      name
-      posts {
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
         items {
           id
-          title
+          starttime
           createdAt
           updatedAt
-          blogPostsId
+          userSessionsId
         }
         nextToken
       }
@@ -47,21 +55,25 @@ export const updateBlog = /* GraphQL */ `
     }
   }
 `;
-export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog(
-    $input: DeleteBlogInput!
-    $condition: ModelBlogConditionInput
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    deleteBlog(input: $input, condition: $condition) {
+    deleteUser(input: $input, condition: $condition) {
       id
-      name
-      posts {
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
         items {
           id
-          title
+          starttime
           createdAt
           updatedAt
-          blogPostsId
+          userSessionsId
         }
         nextToken
       }
@@ -70,192 +82,84 @@ export const deleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const createPost = /* GraphQL */ `
-  mutation CreatePost(
-    $input: CreatePostInput!
-    $condition: ModelPostConditionInput
+export const createSession = /* GraphQL */ `
+  mutation CreateSession(
+    $input: CreateSessionInput!
+    $condition: ModelSessionConditionInput
   ) {
-    createPost(input: $input, condition: $condition) {
+    createSession(input: $input, condition: $condition) {
       id
-      title
-      blog {
+      starttime
+      user {
         id
-        name
-        posts {
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      blogPostsId
+      userSessionsId
     }
   }
 `;
-export const updatePost = /* GraphQL */ `
-  mutation UpdatePost(
-    $input: UpdatePostInput!
-    $condition: ModelPostConditionInput
+export const updateSession = /* GraphQL */ `
+  mutation UpdateSession(
+    $input: UpdateSessionInput!
+    $condition: ModelSessionConditionInput
   ) {
-    updatePost(input: $input, condition: $condition) {
+    updateSession(input: $input, condition: $condition) {
       id
-      title
-      blog {
+      starttime
+      user {
         id
-        name
-        posts {
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      blogPostsId
+      userSessionsId
     }
   }
 `;
-export const deletePost = /* GraphQL */ `
-  mutation DeletePost(
-    $input: DeletePostInput!
-    $condition: ModelPostConditionInput
+export const deleteSession = /* GraphQL */ `
+  mutation DeleteSession(
+    $input: DeleteSessionInput!
+    $condition: ModelSessionConditionInput
   ) {
-    deletePost(input: $input, condition: $condition) {
+    deleteSession(input: $input, condition: $condition) {
       id
-      title
-      blog {
+      starttime
+      user {
         id
-        name
-        posts {
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      blogPostsId
-    }
-  }
-`;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    createComment(input: $input, condition: $condition) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      postCommentsId
-    }
-  }
-`;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    updateComment(input: $input, condition: $condition) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      postCommentsId
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      post {
-        id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        blogPostsId
-      }
-      content
-      createdAt
-      updatedAt
-      postCommentsId
+      userSessionsId
     }
   }
 `;
