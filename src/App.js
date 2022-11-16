@@ -71,7 +71,7 @@ const App = ({ signOut, user }) => {
         placeholder="Handedness"
       />
       <button style={styles.button} onClick={addUser}>Save Profile</button>
- 
+      <br></br>
     
       <Heading level={3}>Current Equipment Listing</Heading>
       <p>
