@@ -37,38 +37,39 @@ const App = ({ signOut, user }) => {
     <div style={styles.container}>
       <Heading level={4}>Welcome, {user.username}</Heading>
       <Button onClick={signOut}>Sign out</Button>
-      <Heading level={1}>Welcome to BowMaster v1</Heading>
+      <Heading level={1}>BowMaster</Heading>
+      <Heading level={3}>Noe Middle School Archery</Heading>
       <br></br>
       <Heading level={3}>User Profile Form</Heading>
       <input
         onChange={event => setInput('firstname', event.target.value)}
         style={styles.input}
         value={formState.firstname}
-        placeholder="First Name"
+        placeholder="First Name (required)"
       />
       <input
         onChange={event => setInput('lastname', event.target.value)}
         style={styles.input}
         value={formState.lastname}
-        placeholder="Last Name"
+        placeholder="Last Name (required)"
       />
       <input
         onChange={event => setInput('email', event.target.value)}
         style={styles.input}
         value={formState.email}
-        placeholder="Email"
+        placeholder="Email (required)"
       />
       <input
         onChange={event => setInput('draw', event.target.value)}
         style={styles.input}
         value={formState.draw}
-        placeholder="Draw"
+        placeholder="Draw (if known)"
       />
       <input
         onChange={event => setInput('handedness', event.target.value)}
         style={styles.input}
         value={formState.handedness}
-        placeholder="Handedness"
+        placeholder="Handedness (if known)"
       />
       <button style={styles.button} onClick={addUser}>Save Profile</button>
       <br></br>
@@ -81,6 +82,8 @@ const App = ({ signOut, user }) => {
       <p>
         Sample data from active session
       </p>
+      <br></br>
+      <p style={styles.footer}>Bowmaster v1</p>
     </div>
   );
 }
@@ -88,8 +91,9 @@ const App = ({ signOut, user }) => {
 const styles = {
   container: { width: 800, margin: '0 auto', display: 'flex',
 flexDirection: 'column', justifyContent: 'center', padding: 20 },
-  button: { backgroundColor: 'blue', color: 'white', outline: 'none',
-fontSize: 18, padding: '12px 0px' }
+  button: { backgroundColor: 'red', color: 'white', outline: 'none',
+fontSize: 18, padding: '12px 0px' },
+  footer: { justifyContent: 'center', color: 'grey', fontStyle: 'italic' }
 }
 
 
