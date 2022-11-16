@@ -145,3 +145,48 @@ export const onDeleteSession = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEquipment = /* GraphQL */ `
+  subscription OnCreateEquipment(
+    $filter: ModelSubscriptionEquipmentFilterInput
+  ) {
+    onCreateEquipment(filter: $filter) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEquipment = /* GraphQL */ `
+  subscription OnUpdateEquipment(
+    $filter: ModelSubscriptionEquipmentFilterInput
+  ) {
+    onUpdateEquipment(filter: $filter) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEquipment = /* GraphQL */ `
+  subscription OnDeleteEquipment(
+    $filter: ModelSubscriptionEquipmentFilterInput
+  ) {
+    onDeleteEquipment(filter: $filter) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;

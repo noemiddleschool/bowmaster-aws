@@ -101,3 +101,36 @@ export const listSessions = /* GraphQL */ `
     }
   }
 `;
+export const getEquipment = /* GraphQL */ `
+  query GetEquipment($id: ID!) {
+    getEquipment(id: $id) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEquipment = /* GraphQL */ `
+  query ListEquipment(
+    $filter: ModelEquipmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEquipment(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        bownumber
+        bowserialnumber
+        draw
+        handedness
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

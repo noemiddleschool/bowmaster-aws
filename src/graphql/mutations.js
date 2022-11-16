@@ -163,3 +163,51 @@ export const deleteSession = /* GraphQL */ `
     }
   }
 `;
+export const createEquipment = /* GraphQL */ `
+  mutation CreateEquipment(
+    $input: CreateEquipmentInput!
+    $condition: ModelEquipmentConditionInput
+  ) {
+    createEquipment(input: $input, condition: $condition) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEquipment = /* GraphQL */ `
+  mutation UpdateEquipment(
+    $input: UpdateEquipmentInput!
+    $condition: ModelEquipmentConditionInput
+  ) {
+    updateEquipment(input: $input, condition: $condition) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEquipment = /* GraphQL */ `
+  mutation DeleteEquipment(
+    $input: DeleteEquipmentInput!
+    $condition: ModelEquipmentConditionInput
+  ) {
+    deleteEquipment(input: $input, condition: $condition) {
+      id
+      bownumber
+      bowserialnumber
+      draw
+      handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;

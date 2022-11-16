@@ -23,3 +23,11 @@ type Session @model {
   starttime: AWSDateTime
   user: User @belongsTo
 }
+
+type Equipment @model {
+  id: ID!
+  bownumber: Int!
+  bowserialnumber: String!
+  draw: Int
+  handedness: Handedness
+}
