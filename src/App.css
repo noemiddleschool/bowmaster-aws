@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+.header {
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-bottom: 1px solid black;
+  margin-bottom: 40px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.titleHeader {
+  font-size: 20px;
+  color: red;
+  font-weight: bold;
+  margin: auto 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navBar>button {
+  cursor: pointer;
+  background-color: white;
+  color: white;
+  font-size: 18px;
+  width: 50px;
+  height: 25px;
+  border: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navBar>button:hover {
+  border: 1px solid red;
+}
+
+.navIcon {
+  height: 25px
+}
+
+.menuNav {
+  position: fixed;
+  display: none;
+  list-style: none;
+  padding: 10px;
+  margin: 5px 0px;
+  height: 0px;
+  right: 0;
+  overflow: hidden;
+  height: fit-content;
+  border: 1px solid black;
+}
+
+.menuNav button {
+  padding: auto;
+  color: black;
+  background-color: white;
+  border: none;
+  width: auto;
+}
+
+.menuNav.showMenu {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100px;
+}
+
+.content {
+  margin: auto;
+  width: 70%;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 20px 0px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input {
+  margin: 10px 0px;
 }
