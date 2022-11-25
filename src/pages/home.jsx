@@ -1,8 +1,5 @@
 import React from 'react'
 
-import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { withAuthenticator, Button, Heading, FieldGroupIcon } from '@aws-amplify/ui-react';
-
 function Home() {
     return (
         <div className='content'>

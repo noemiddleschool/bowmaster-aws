@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Amplify, API, graphqlOperation } from 'aws-amplify'
+import { API, graphqlOperation } from 'aws-amplify'
 import { createUser } from '../graphql/mutations';
 
 const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', handedness: '' }
