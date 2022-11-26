@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import menuIcon from './menu_icon.png'
 import './App.css';
 import React, { useEffect, useState } from 'react'
-import { Amplify, API, graphqlOperation } from 'aws-amplify'
+import { Amplify, API, AWSPinpointProvider, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
 import { listEquipment, getEquipment } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
@@ -19,23 +19,34 @@ const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', hand
 const App = ({ signOut, user }) => {
   const [formState, setFormState] = useState(initialUserForm)
   const [users, setUsers] = useState([])
-  const [equipments, setEquipments] = useState([])
+  const [equipments, setEquipment] = useState([])
 
   useEffect(() => {
-    fetchEquipment()
+    getEquipment()
   }, [])
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
   }
-
-  async function fetchEquipment() {
+/*
+  async function getEquipment() {
     try {
+      const equipmentData = await API.graphql({
+        query: listEquipment
+      })
+      console.log('equipment: ', equipmentData);
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+*/
 
+  async function getEquipment() {
+    try {
       const equipmentData = await API.graphql(graphqlOperation(listEquipment))
-      console.log(equipmentData)
-
-    } catch (err) { console.log('error fetching equipment list') }
+      const equipments = equipmentData.data.listEquipment.items
+      setEquipment(equipments)
+    } catch (err) { console.log('error retrieving equipment list') }
   }
 
   async function addUser() {
@@ -105,15 +116,28 @@ const App = ({ signOut, user }) => {
         </form>
 
         <Heading level={3}>Current Equipment Listing</Heading>
-          
-          {
+        <table>
+          <thead>
+            <tr>
+              <th>Bownumber</th>
+              <th>Bow Serial Number</th>
+              <th>Draw</th>
+              <th>Handedness</th>
+            </tr>
+          </thead>
+        {
           equipments.map((equipment, index) => (
-            <div key={equipment.id ? equipment.id : index}>
-              <p>{equipment.bownumber}</p>
-              <p>{equipment.bowserialnumber}</p>
-            </div>
+            <tbody key={equipment.id ? equipment.id : index}>
+              <tr>
+              <td>{equipment.bownumber}</td>
+              <td>{equipment.bowserialnumber}</td>
+              <td>{equipment.draw}</td>
+              <td>{equipment.handedness}</td>
+              </tr>
+            </tbody>
           ))
-          }
+        }
+        </table>
         <Heading level={3}>Current Active Sessions</Heading>
         <p>
           Sample data from active session
