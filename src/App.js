@@ -5,6 +5,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
+import { listEquipment } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
@@ -13,12 +14,26 @@ Amplify.configure(awsExports);
 
 const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', handedness: '' }
 
+
 const App = ({ signOut, user }) => {
   const [formState, setFormState] = useState(initialUserForm)
   const [users, setUsers] = useState([])
+  const [equipments, setEquipments] = useState([])
+
+  useEffect(() => {
+    fetchEquipment()
+  }, [])
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
+  }
+
+  async function fetchEquipment() {
+    try {
+      const equipmentData = await API.graphql(graphqlOperation(listEquipment))
+      const equipments = equipmentData.data.listEquipment.items
+      setEquipments(equipments)
+    } catch (err) { console.log('error fetching equipment list') }
   }
 
   async function addUser() {
@@ -88,9 +103,14 @@ const App = ({ signOut, user }) => {
         </form>
 
         <Heading level={3}>Current Equipment Listing</Heading>
-        <p>
-          Sample data of equipment matching profile requirements
-        </p>
+        {
+          equipments.map((equipment, index) => (
+            <div key={equipment.id ? equipment.id : index}>
+              <p>{equipment.bownumber}</p>
+              <p>{equipment.bowserialnumber}</p>
+            </div>
+          ))
+        }
         <Heading level={3}>Current Active Sessions</Heading>
         <p>
           Sample data from active session
