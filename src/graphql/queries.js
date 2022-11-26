@@ -1,54 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        firstname
-        lastname
-        email
-        draw
-        handedness
-        sessions {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getSession = /* GraphQL */ `
   query GetSession($id: ID!) {
     getSession(id: $id) {
@@ -66,6 +18,7 @@ export const getSession = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -92,6 +45,7 @@ export const listSessions = /* GraphQL */ `
           handedness
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
@@ -129,6 +83,56 @@ export const listEquipment = /* GraphQL */ `
         handedness
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        firstname
+        lastname
+        email
+        draw
+        handedness
+        sessions {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

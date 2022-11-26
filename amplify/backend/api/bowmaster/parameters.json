@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "bowmaster",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authbowmasterc26e4f2b",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

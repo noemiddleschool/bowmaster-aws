@@ -28,18 +28,7 @@ const App = ({ signOut, user }) => {
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
   }
-/*
-  async function getEquipment() {
-    try {
-      const equipmentData = await API.graphql({
-        query: listEquipment
-      })
-      console.log('equipment: ', equipmentData);
-    } catch (err) {
-      console.log({ err });
-    }
-  }
-*/
+
 
   async function getEquipment() {
     try {
@@ -138,6 +127,7 @@ const App = ({ signOut, user }) => {
           ))
         }
         </table>
+        <br></br>
         <Heading level={3}>Current Active Sessions</Heading>
         <p>
           Sample data from active session

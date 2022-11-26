@@ -8,7 +8,7 @@ enum Handedness {
   RIGHT
 }
 
-type User @model {
+type User @model @auth(rules: [{ allow: owner }]) {
   id : ID!
   firstname: String!
   lastname: String!
