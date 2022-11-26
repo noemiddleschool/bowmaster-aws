@@ -2,7 +2,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react'
-import { Amplify, API, graphqlOperation } from 'aws-amplify'
+import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
 import { listEquipment } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
@@ -17,14 +17,22 @@ const App = ({ signOut, user }) => {
   const [formState, setFormState] = useState(initialUserForm)
   const [users, setUsers] = useState([])
   const [equipments, setEquipment] = useState([])
+  const [profile, setProfile] = useState([])
 
   function setInput(key, value) { 
     setFormState({...formState, [key]: value})
   }
 
   useEffect(() => {
+    checkUser();
     getEquipment()
   }, [])
+
+  async function checkUser() {
+    const currentUser = await Auth.currentAuthenticatedUser();
+    setProfile(currentUser.attributes.email)
+  }
+
   async function getEquipment() {
     try {
       const equipmentData = await API.graphql(graphqlOperation(listEquipment))
@@ -87,7 +95,6 @@ const App = ({ signOut, user }) => {
       <br></br>
     
       <Heading level={3}>Current Equipment Listing</Heading>
-      <p>
       <table>
           <thead>
             <tr>
@@ -111,7 +118,6 @@ const App = ({ signOut, user }) => {
         }
         </table>
         <br></br>
-      </p>
       <Heading level={3}>Current Active Sessions</Heading>
       <p>
         Sample data from active session
