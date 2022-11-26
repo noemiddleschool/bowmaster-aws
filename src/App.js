@@ -5,11 +5,12 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
-import { listEquipment } from './graphql/queries'
+import { listEquipment, getEquipment } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from "./aws-exports";
+import { toBeInTheDocument } from '@testing-library/jest-dom/dist/matchers';
 Amplify.configure(awsExports);
 
 const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', handedness: '' }
@@ -30,9 +31,10 @@ const App = ({ signOut, user }) => {
 
   async function fetchEquipment() {
     try {
+
       const equipmentData = await API.graphql(graphqlOperation(listEquipment))
-      const equipments = equipmentData.data.listEquipment.items
-      setEquipments(equipments)
+      console.log(equipmentData)
+
     } catch (err) { console.log('error fetching equipment list') }
   }
 
@@ -103,14 +105,15 @@ const App = ({ signOut, user }) => {
         </form>
 
         <Heading level={3}>Current Equipment Listing</Heading>
-        {
+          
+          {
           equipments.map((equipment, index) => (
             <div key={equipment.id ? equipment.id : index}>
               <p>{equipment.bownumber}</p>
               <p>{equipment.bowserialnumber}</p>
             </div>
           ))
-        }
+          }
         <Heading level={3}>Current Active Sessions</Heading>
         <p>
           Sample data from active session
