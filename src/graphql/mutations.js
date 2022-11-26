@@ -1,6 +1,87 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createSession = /* GraphQL */ `
   mutation CreateSession(
     $input: CreateSessionInput!
@@ -19,7 +100,6 @@ export const createSession = /* GraphQL */ `
         sessions {
           nextToken
         }
-        owner
         createdAt
         updatedAt
       }
@@ -47,7 +127,6 @@ export const updateSession = /* GraphQL */ `
         sessions {
           nextToken
         }
-        owner
         createdAt
         updatedAt
       }
@@ -75,7 +154,6 @@ export const deleteSession = /* GraphQL */ `
         sessions {
           nextToken
         }
-        owner
         createdAt
         updatedAt
       }
@@ -128,90 +206,6 @@ export const deleteEquipment = /* GraphQL */ `
       bowserialnumber
       draw
       handedness
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      owner
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    deleteUser(input: $input, condition: $condition) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      owner
       createdAt
       updatedAt
     }

@@ -17,6 +17,12 @@
       },
       "api": {
         "bowmaster": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1ovfcxb0ezovx",
+          "type": "cicd"
+        }
       }
     }
   }

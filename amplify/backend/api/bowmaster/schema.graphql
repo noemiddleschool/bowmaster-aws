@@ -9,11 +9,7 @@ enum Handedness {
 }
 
 type User 
-  @model
-  @auth(
-    rules: [
-      { allow: owner, ownerField: "owner", operations: [create, update, delete, read] },
-    ]) {
+  @model {
   id : ID!
   firstname: String!
   lastname: String!
@@ -21,7 +17,6 @@ type User
   draw: Int
   handedness: Handedness
   sessions: [Session] @hasMany
-  owner: String
 }
 
 type Session @model {
