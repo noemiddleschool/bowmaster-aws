@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-bowmaster-dev-103151-authRole",
-      "UnauthRoleArn": "arn:aws:iam::974848205520:role/amplify-bowmaster-dev-103151-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::974848205520:role/amplify-bowmaster-dev-103151-authRole",
+      "AuthRoleName": "amplify-bowmaster-dev-154232-authRole",
+      "UnauthRoleArn": "arn:aws:iam::974848205520:role/amplify-bowmaster-dev-154232-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::974848205520:role/amplify-bowmaster-dev-154232-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-bowmaster-dev-103151-deployment",
-      "UnauthRoleName": "amplify-bowmaster-dev-103151-unauthRole",
-      "StackName": "amplify-bowmaster-dev-103151",
-      "StackId": "arn:aws:cloudformation:us-east-1:974848205520:stack/amplify-bowmaster-dev-103151/f8601c50-61d5-11ed-93f3-12484d2aa231",
-      "AmplifyAppId": "d27mvkpyhoyru5"
+      "DeploymentBucketName": "amplify-bowmaster-dev-154232-deployment",
+      "UnauthRoleName": "amplify-bowmaster-dev-154232-unauthRole",
+      "StackName": "amplify-bowmaster-dev-154232",
+      "StackId": "arn:aws:cloudformation:us-east-1:974848205520:stack/amplify-bowmaster-dev-154232/dac3f490-6dca-11ed-b020-12a53179e535",
+      "AmplifyAppId": "d1ovfcxb0ezovx"
     },
     "categories": {
       "auth": {
-        "bowmasterc26e4f2b": {}
+        "bowmaster4934f8de": {}
       },
       "api": {
         "bowmaster": {}

@@ -1,78 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
-    onCreateUser(filter: $filter) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
-    onUpdateUser(filter: $filter) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
-    onDeleteUser(filter: $filter) {
-      id
-      firstname
-      lastname
-      email
-      draw
-      handedness
-      sessions {
-        items {
-          id
-          starttime
-          createdAt
-          updatedAt
-          userSessionsId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateSession = /* GraphQL */ `
   subscription OnCreateSession($filter: ModelSubscriptionSessionFilterInput) {
     onCreateSession(filter: $filter) {
@@ -88,6 +16,7 @@ export const onCreateSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
       }
@@ -112,6 +41,7 @@ export const onUpdateSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
       }
@@ -136,6 +66,7 @@ export const onDeleteSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
       }
@@ -185,6 +116,90 @@ export const onDeleteEquipment = /* GraphQL */ `
       bowserialnumber
       draw
       handedness
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser(
+    $filter: ModelSubscriptionUserFilterInput
+    $owner: String
+  ) {
+    onCreateUser(filter: $filter, owner: $owner) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser(
+    $filter: ModelSubscriptionUserFilterInput
+    $owner: String
+  ) {
+    onUpdateUser(filter: $filter, owner: $owner) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser(
+    $filter: ModelSubscriptionUserFilterInput
+    $owner: String
+  ) {
+    onDeleteUser(filter: $filter, owner: $owner) {
+      id
+      firstname
+      lastname
+      email
+      draw
+      handedness
+      sessions {
+        items {
+          id
+          starttime
+          createdAt
+          updatedAt
+          userSessionsId
+        }
+        nextToken
+      }
+      owner
       createdAt
       updatedAt
     }
