@@ -2,13 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './home';
 import Profile from './profile';
 
-import { Amplify } from 'aws-amplify'
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-
-import awsExports from "../aws-exports";
-Amplify.configure(awsExports);
-
 const Main = ({ user }) => {
     return (
         <Routes>
@@ -18,4 +11,4 @@ const Main = ({ user }) => {
     );
 }
 
-export default withAuthenticator(Main)
+export default Main;
