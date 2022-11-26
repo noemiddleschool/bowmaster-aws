@@ -16,9 +16,9 @@ export const getSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
@@ -43,9 +43,9 @@ export const listSessions = /* GraphQL */ `
           email
           draw
           handedness
+          owner
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
@@ -107,9 +107,9 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -130,9 +130,9 @@ export const listUsers = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

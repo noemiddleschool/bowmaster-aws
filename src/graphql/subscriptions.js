@@ -16,9 +16,9 @@ export const onCreateSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
@@ -41,9 +41,9 @@ export const onUpdateSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
@@ -66,9 +66,9 @@ export const onDeleteSession = /* GraphQL */ `
         sessions {
           nextToken
         }
+        owner
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
@@ -143,9 +143,9 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -171,9 +171,9 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -199,9 +199,9 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
