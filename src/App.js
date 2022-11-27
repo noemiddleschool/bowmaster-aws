@@ -4,7 +4,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
-import { listEquipment } from './graphql/queries'
+import { listEquipment, listUsers } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
@@ -18,6 +18,8 @@ const App = ({ signOut, user }) => {
   const [users, setUsers] = useState([])
   const [equipments, setEquipment] = useState([])
   const [profile, setProfile] = useState([])
+  const [userDraw, setUserDraw] = useState([])
+  const [userhandedness, setUserHandedness] = useState([])
 
   function setInput(key, value) { 
     setFormState({...formState, [key]: value})
@@ -30,7 +32,13 @@ const App = ({ signOut, user }) => {
 
   async function checkUser() {
     const currentUser = await Auth.currentAuthenticatedUser();
-    setProfile(currentUser.attributes.email)
+    console.log({currentUser});
+    setProfile(currentUser.attributes.email);
+    const userRecord = await API.graphql(graphqlOperation(listUsers, {filter: { email: { eq: currentUser.attributes.email} } }));
+    console.log({userRecord});
+    setUserDraw(userRecord.data.listUsers.items[0].draw)
+    setUserHandedness(userRecord.data.listUsers.items[0].handedness)
+ 
   }
 
   async function getEquipment() {
@@ -38,8 +46,11 @@ const App = ({ signOut, user }) => {
       const equipmentData = await API.graphql(graphqlOperation(listEquipment))
       const equipments = equipmentData.data.listEquipment.items
       setEquipment(equipments)
-    } catch (err) { console.log('error retrieving equipment list') }
+    } catch (err) { 
+      console.log('error retrieving equipment list:', err) 
+    }
   }
+
   async function addUser() {
     try {
       if (!formState.firstname || !formState.lastname || !formState.email) return
@@ -52,10 +63,10 @@ const App = ({ signOut, user }) => {
     }
   }
 
-
   return (
     <div style={styles.container}>
       <Heading level={4}>Welcome, {user.username}</Heading>
+      Email: {profile}
       <Button onClick={signOut}>Sign out</Button>
       <Heading level={1}>BowMaster</Heading>
       <Heading level={3}>Noe Middle School Archery</Heading>
@@ -95,6 +106,8 @@ const App = ({ signOut, user }) => {
       <br></br>
     
       <Heading level={3}>Current Equipment Listing</Heading>
+      <div align="right">Criteria based on currrent profile: </div>
+      <div align="right">Draw: {userDraw} Handedness: {userhandedness}</div>
       <table>
           <thead>
             <tr>
@@ -118,7 +131,7 @@ const App = ({ signOut, user }) => {
         }
         </table>
         <br></br>
-      <Heading level={3}>Current Active Sessions</Heading>
+      <Heading level={3}>Current Active Session</Heading>
       <p>
         Sample data from active session
       </p>
