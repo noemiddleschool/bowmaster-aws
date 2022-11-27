@@ -1,5 +1,6 @@
 /* src/App.js */
 import logo from './logo.svg';
+import menuIcon from './menu_icon.png'
 import './App.css';
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
@@ -84,13 +85,30 @@ const App = ({ signOut, user }) => {
     }
   }
 
+
+
+  const [navbarOpen, setNavbarOpen] = useState(false)
+  const handleToggle = () => {
+    setNavbarOpen(!navbarOpen)
+  }
+
+
+
   return (
     <div style={styles.container}>
-      <Heading level={4}>Welcome, {user.username}</Heading>
-      Email: {profile}
-      <Button onClick={signOut}>Sign out</Button>
-      <Heading level={1}>BowMaster</Heading>
-      <Heading level={3}>Noe Middle School Archery</Heading>
+      <div className='header row'>
+        <p className='titleHeader'>BowMaster</p>
+        <nav className='navBar'>
+        <button onClick={handleToggle}><img alt="menu icon" src={menuIcon} className="navIcon"></img></button>
+          <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+            <li><button onClick={signOut}>Sign out</button></li>
+          </ul>
+        </nav>
+      </div>
+      <div align="right">
+        <Heading level={4}>Welcome, {user.username}</Heading>
+        Email: {profile}
+      </div>
       <br></br>
       <Heading level={3}>User Profile Form</Heading>
       First Name:
