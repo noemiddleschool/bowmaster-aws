@@ -41,13 +41,13 @@ const App = ({ signOut, user }) => {
     setLastName(userRecord.data.listUsers.items[0].lastname)
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
-    getEquipment(userRecord.data.listUsers.items[0].draw)
+    getEquipment(userRecord.data.listUsers.items[0].draw, userRecord.data.listUsers.items[0].handedness)
  
   }
 
-  async function getEquipment(draw) {
+  async function getEquipment(draw, handedness) {
     try {
-      const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}}}))
+      const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}, handedness: { eq: handedness}}}))
       const equipments = equipmentData.data.listEquipment.items
       setEquipment(equipments)
     } catch (err) { 
