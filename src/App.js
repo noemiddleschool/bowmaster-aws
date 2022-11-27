@@ -131,14 +131,14 @@ const App = ({ signOut, user }) => {
         value={formState.email}
         placeholder={profile}
       />
-      Draw (if known):
+      Draw:
       <input
         onChange={event => setInput('draw', event.target.value)}
         style={styles.input}
         value={formState.draw}
         placeholder={userDraw}
       />
-      Handedness (if known):
+      Handedness (LEFT/RIGHT/UNKNOWN):
       <input
         onChange={event => setInput('handedness', event.target.value)}
         style={styles.input}
