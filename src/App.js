@@ -29,7 +29,6 @@ const App = ({ signOut, user }) => {
 
   useEffect(() => {
     checkUser();
-    getEquipment()
   }, [])
 
   async function checkUser() {
@@ -42,12 +41,13 @@ const App = ({ signOut, user }) => {
     setLastName(userRecord.data.listUsers.items[0].lastname)
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
+    getEquipment(userRecord.data.listUsers.items[0].draw)
  
   }
 
-  async function getEquipment() {
+  async function getEquipment(draw) {
     try {
-      const equipmentData = await API.graphql(graphqlOperation(listEquipment))
+      const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}}}))
       const equipments = equipmentData.data.listEquipment.items
       setEquipment(equipments)
     } catch (err) { 
