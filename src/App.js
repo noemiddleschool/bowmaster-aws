@@ -18,6 +18,8 @@ const App = ({ signOut, user }) => {
   const [users, setUsers] = useState([])
   const [equipments, setEquipment] = useState([])
   const [profile, setProfile] = useState([])
+  const [firstName, setFirstName] = useState([])
+  const [lastName, setLastName] = useState([])
   const [userDraw, setUserDraw] = useState([])
   const [userhandedness, setUserHandedness] = useState([])
 
@@ -36,6 +38,8 @@ const App = ({ signOut, user }) => {
     setProfile(currentUser.attributes.email);
     const userRecord = await API.graphql(graphqlOperation(listUsers, {filter: { email: { eq: currentUser.attributes.email} } }));
     console.log({userRecord});
+    setFirstName(userRecord.data.listUsers.items[0].firstname)
+    setLastName(userRecord.data.listUsers.items[0].lastname)
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
  
@@ -72,35 +76,39 @@ const App = ({ signOut, user }) => {
       <Heading level={3}>Noe Middle School Archery</Heading>
       <br></br>
       <Heading level={3}>User Profile Form</Heading>
+      First Name:
       <input
         onChange={event => setInput('firstname', event.target.value)}
         style={styles.input}
         value={formState.firstname}
-        placeholder="First Name (required)"
+        placeholder={firstName}
       />
+      Last Name:
       <input
         onChange={event => setInput('lastname', event.target.value)}
         style={styles.input}
         value={formState.lastname}
-        placeholder="Last Name (required)"
+        placeholder={lastName}
       />
-      <input
+      Email: <input
         onChange={event => setInput('email', event.target.value)}
         style={styles.input}
         value={formState.email}
-        placeholder="Email (required)"
+        placeholder={profile}
       />
+      Draw (if known):
       <input
         onChange={event => setInput('draw', event.target.value)}
         style={styles.input}
         value={formState.draw}
-        placeholder="Draw (if known)"
+        placeholder={userDraw}
       />
+      Handedness (if known):
       <input
         onChange={event => setInput('handedness', event.target.value)}
         style={styles.input}
         value={formState.handedness}
-        placeholder="Handedness (if known)"
+        placeholder={userhandedness}
       />
       <button style={styles.button} onClick={addUser}>Save Profile</button>
       <br></br>
