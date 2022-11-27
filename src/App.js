@@ -47,9 +47,26 @@ const App = ({ signOut, user }) => {
 
   async function getEquipment(draw, handedness) {
     try {
+      if (draw == null && handedness != null) {
+      const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { handedness: { eq: handedness}}}));
+      const equipments = equipmentData.data.listEquipment.items;
+      setEquipment(equipments);
+      } 
+      else if (draw != null && handedness != null) {
       const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}, handedness: { eq: handedness}}}))
       const equipments = equipmentData.data.listEquipment.items
       setEquipment(equipments)
+      }
+      else if (draw != null && handedness == null) {
+        const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}}}));
+        const equipments = equipmentData.data.listEquipment.items;
+        setEquipment(equipments);
+      }
+      else {
+        const equipmentData = await API.graphql(graphqlOperation(listEquipment));
+        const equipments = equipmentData.data.listEquipment.items;
+        setEquipment(equipments);
+      }
     } catch (err) { 
       console.log('error retrieving equipment list:', err) 
     }
