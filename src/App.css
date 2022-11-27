@@ -1,3 +1,12 @@
+.container {
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+}
+
 .header {
   height: 45px;
   display: flex;
@@ -12,6 +21,10 @@
   color: red;
   font-weight: bold;
   margin: auto 0;
+}
+
+.navBar {
+  text-align: end;
 }
 
 .navBar>button {
@@ -36,13 +49,14 @@
   position: fixed;
   display: none;
   list-style: none;
-  padding: 10px;
-  margin: 5px 0px;
+  padding: 8px;
+  margin: 6px 0px;
   height: 0px;
   right: 0;
   overflow: hidden;
   height: fit-content;
   border: 1px solid black;
+  border-top: none;
 }
 
 .menuNav button {
@@ -55,8 +69,8 @@
 
 .menuNav.showMenu {
   display: flex;
-  flex-direction: column;
   width: 100px;
+  position: unset;
 }
 
 .content {
@@ -68,12 +82,23 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 500px;
   margin: 20px 0px;
 }
 
+.submitBtn {
+  background-color: red;
+  color: white;
+  outline: none;
+  font-size: 18px;
+  padding: 12px 0px;
+}
+
 input {
-  margin: 10px 0px;
+  margin: 3px 0px 20px 0px;
+}
+
+.equipmentListing {
+  margin: 20px 0px;
 }
 
 table, th, td {
@@ -84,4 +109,35 @@ table, th, td {
 
 th, td {
   padding: 7px;
+}
+
+.activeSession {
+  margin: 20px 0px;
+}
+
+.footer {
+  justify-content: center;
+  color: grey;
+  font-style: italic;
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: auto;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 375px) {
+  th, td {
+    padding: 5px;
+    font-size: 14px;
+  }
 }
