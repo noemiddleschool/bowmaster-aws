@@ -24,6 +24,7 @@ const App = ({ signOut, user }) => {
   const [lastName, setLastName] = useState([])
   const [userDraw, setUserDraw] = useState([])
   const [userhandedness, setUserHandedness] = useState([])
+  const [session, setSession] = useState([])
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
@@ -35,28 +36,26 @@ const App = ({ signOut, user }) => {
 
   async function checkUser() {
     const currentUser = await Auth.currentAuthenticatedUser();
-    console.log({ currentUser });
     setProfile(currentUser.attributes.email);
     const userRecord = await API.graphql(graphqlOperation(listUsers, { filter: { email: { eq: currentUser.attributes.email } } }));
-    console.log({ userRecord });
     setFirstName(userRecord.data.listUsers.items[0].firstname)
     setLastName(userRecord.data.listUsers.items[0].lastname)
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
     getEquipment(userRecord.data.listUsers.items[0].draw, userRecord.data.listUsers.items[0].handedness)
-    getSessionForDisplay(userRecord.data.listUsers.items[0].id)
+    setSession(await getSessionForDisplay(userRecord.data.listUsers.items[0].id))
 
   }
 
   async function getEquipment(draw, handedness) {
     try {
       if (handedness == 'UNKNOWN') {
-        const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}}}))
+        const equipmentData = await API.graphql(graphqlOperation(listEquipment, { filter: { draw: { eq: draw } } }))
         const equipments = equipmentData.data.listEquipment.items
         setEquipment(equipments)
-      } 
+      }
       else {
-        const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}, handedness: { eq: handedness}}}));
+        const equipmentData = await API.graphql(graphqlOperation(listEquipment, { filter: { draw: { eq: draw }, handedness: { eq: handedness } } }));
         const equipments = equipmentData.data.listEquipment.items;
         setEquipment(equipments);
       }
@@ -79,8 +78,7 @@ const App = ({ signOut, user }) => {
 
   async function getUserSessions(userId) {
     try {
-      const userSessions = await API.graphql(graphqlOperation(listSessions, {filter: { userSessionsId: { eq: userId}}}))
-      console.log("User sessions: ", userSessions)
+      const userSessions = await API.graphql(graphqlOperation(listSessions, { filter: { userSessionsId: { eq: userId } } }))
       return userSessions
     } catch (err) {
       console.log("Error retrieving user sessions: ", err)
@@ -90,7 +88,6 @@ const App = ({ signOut, user }) => {
   async function getAllSessions() {
     try {
       const allSessions = await API.graphql(graphqlOperation(listSessions, {}))
-      console.log('Returned sessions: ', allSessions)
     } catch (err) {
       console.log("error retrieving sessions: ", err)
     }
@@ -98,40 +95,36 @@ const App = ({ signOut, user }) => {
 
   async function getSessionForDisplay(userId) {
     try {
-    const userSessions = await getUserSessions(userId)
-    console.log("user sessions", userSessions)
-    const currentTime = new Date().toISOString.valueOf()
-    var currentSession = null
-    var upcomingSession = null
-    userSessions.data.listSessions.items.forEach(session => {
-      if (session.endtime == null) {
-        if (session.starttime.valueOf() >= currentTime) {
-          currentSession = session
-          console.log("found current session!", currentSession)
-        } else if (session.starttime.valueOf() < currentTime) {
-          if (upcomingSession != null) {
-            if (session.starttime.valueOf() > upcomingSession.starttime.valueOf()) {
+      const userSessions = await getUserSessions(userId)
+      const currentTime = new Date().toISOString.valueOf()
+      var currentSession = null
+      var upcomingSession = null
+      userSessions.data.listSessions.items.forEach(session => {
+        if (session.endtime == null) {
+          if (session.starttime.valueOf() >= currentTime) {
+            currentSession = session
+          } else if (session.starttime.valueOf() < currentTime) {
+            if (upcomingSession != null) {
+              if (session.starttime.valueOf() > upcomingSession.starttime.valueOf()) {
+                upcomingSession = session
+              }
+            } else {
               upcomingSession = session
-              console.log("found upcoming session!", upcomingSession)
             }
-          } else {
-            upcomingSession = session
-            console.log("found upcoming session!", upcomingSession)
           }
         }
+      });
+      if (currentSession != null) {
+        return currentSession
+      } else if (upcomingSession != null) {
+        return upcomingSession
+      } else {
+        console.log("couldnt find any sessions!!!")
+        return null
       }
-    });
-    if(currentSession != null) {
-      return currentSession
-    } else if (upcomingSession != null) {
-      return upcomingSession
-    } else {
-      console.log("couldnt find any sessions!!!")
-      return null
+    } catch (err) {
+      console.log("error in finding current and upcoming sessions!!!", err)
     }
-  } catch (err) {
-    console.log("error in finding current and upcoming sessions!!!", err)
-  }
   }
 
   const [navbarOpen, setNavbarOpen] = useState(false)
@@ -219,7 +212,12 @@ const App = ({ signOut, user }) => {
       <div className='activeSession'>
         <h1>Current Active Session</h1>
         <p>
-          Sample data from active session
+          {session.starttime >= new Date().toISOString.valueOf()
+            ? <>
+              <div className='currentSession'>Practice started at: {session.starttime}</div>
+            </>
+            : <div className='upcomingSession'>There is no current current practice. The next practice will begin at {session.starttime}</div>
+          }
         </p>
       </div>
       <p className='footer'>Bowmaster v1</p>
