@@ -216,7 +216,7 @@ const App = ({ signOut, user }) => {
             ? <>
               <div className='currentSession'>Practice started at: {session.starttime}</div>
             </>
-            : <div className='upcomingSession'>There is no current current practice. The next practice will begin at {session.starttime}</div>
+            : <div className='upcomingSession'>There is no current practice. The next practice will begin at {session.starttime}</div>
           }
         </p>
       </div>
