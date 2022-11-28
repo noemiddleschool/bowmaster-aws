@@ -25,8 +25,8 @@ const App = ({ signOut, user }) => {
   const [userDraw, setUserDraw] = useState([])
   const [userhandedness, setUserHandedness] = useState([])
 
-  function setInput(key, value) { 
-    setFormState({...formState, [key]: value})
+  function setInput(key, value) {
+    setFormState({ ...formState, [key]: value })
   }
 
   useEffect(() => {
@@ -35,10 +35,10 @@ const App = ({ signOut, user }) => {
 
   async function checkUser() {
     const currentUser = await Auth.currentAuthenticatedUser();
-    console.log({currentUser});
+    console.log({ currentUser });
     setProfile(currentUser.attributes.email);
-    const userRecord = await API.graphql(graphqlOperation(listUsers, {filter: { email: { eq: currentUser.attributes.email} } }));
-    console.log({userRecord});
+    const userRecord = await API.graphql(graphqlOperation(listUsers, { filter: { email: { eq: currentUser.attributes.email } } }));
+    console.log({ userRecord });
     setFirstName(userRecord.data.listUsers.items[0].firstname)
     FirstNameVar = userRecord.data.listUsers.items[0].firstname
     
@@ -46,7 +46,7 @@ const App = ({ signOut, user }) => {
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
     getEquipment(userRecord.data.listUsers.items[0].draw, userRecord.data.listUsers.items[0].handedness)
- 
+
   }
 
   async function getEquipment(draw, handedness) {
@@ -62,8 +62,8 @@ const App = ({ signOut, user }) => {
         const equipments = equipmentData.data.listEquipment.items;
         setEquipment(equipments);
       }
-    } catch (err) { 
-      console.log('error retrieving equipment list:', err) 
+    } catch (err) {
+      console.log('error retrieving equipment list:', err)
     }
   }
 
@@ -73,7 +73,7 @@ const App = ({ signOut, user }) => {
       const user = { ...formState }
       setUsers([...users, user])
       setFormState(initialUserForm)
-      await API.graphql(graphqlOperation(createUser, {input: user}))
+      await API.graphql(graphqlOperation(createUser, { input: user }))
     } catch (err) {
       console.log('error creating user:', err)
     }
@@ -89,63 +89,59 @@ const App = ({ signOut, user }) => {
 
 
   return (
-    <div style={styles.container}>
+    <div className='container'>
       <div className='header row'>
         <p className='titleHeader'>BowMaster</p>
         <nav className='navBar'>
-        <button onClick={handleToggle}><img alt="menu icon" src={menuIcon} className="navIcon"></img></button>
+          <button onClick={handleToggle}><img alt="menu icon" src={menuIcon} className="navIcon"></img></button>
           <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
             <li><button onClick={signOut}>Sign out</button></li>
           </ul>
         </nav>
       </div>
       <div align="right">
-        <Heading level={4}>Welcome, {user.username}</Heading>
+        <h2>Welcome, {user.username}</h2>
         Email: {profile}
       </div>
-      <br></br>
-      <Heading level={3}>User Profile Form</Heading>
-      First Name:
-      <input
-        onChange={event => setInput('firstname', event.target.value)}
-        style={styles.input}
-        value={formState.firstname}
-        placeholder={firstName}
-      />
-      Last Name:
-      <input
-        onChange={event => setInput('lastname', event.target.value)}
-        style={styles.input}
-        value={formState.lastname}
-        placeholder={lastName}
-      />
-      Email: <input
-        onChange={event => setInput('email', event.target.value)}
-        style={styles.input}
-        value={formState.email}
-        placeholder={profile}
-      />
-      Draw:
-      <input
-        onChange={event => setInput('draw', event.target.value)}
-        style={styles.input}
-        value={formState.draw}
-        placeholder={userDraw}
-      />
-      Handedness (LEFT/RIGHT/UNKNOWN):
-      <input
-        onChange={event => setInput('handedness', event.target.value)}
-        style={styles.input}
-        value={formState.handedness}
-        placeholder={userhandedness}
-      />
-      <button style={styles.button} onClick={addUser}>Save Profile</button>
-      <br></br>
-    
-      <Heading level={3}>Current Equipment Listing</Heading>
-      <div align="right">Criteria based on currrent profile: </div>
-      <div align="right">Draw: {userDraw} Handedness: {userhandedness}</div>
-      <table>
+      <form>
+        <h1>User Profile Form</h1>
+        First Name:
+        <input
+          onChange={event => setInput('firstname', event.target.value)}
+          value={formState.firstname}
+          placeholder={firstName}
+        />
+        Last Name:
+        <input
+          onChange={event => setInput('lastname', event.target.value)}
+          value={formState.lastname}
+          placeholder={lastName}
+        />
+        Email: <input
+          onChange={event => setInput('email', event.target.value)}
+          value={formState.email}
+          placeholder={profile}
+        />
+        Draw:
+        <input
+          onChange={event => setInput('draw', event.target.value)}
+          value={formState.draw}
+          placeholder={userDraw}
+        />
+        Handedness (LEFT/RIGHT/UNKNOWN):
+        <input
+          onChange={event => setInput('handedness', event.target.value)}
+          value={formState.handedness}
+          placeholder={userhandedness}
+        />
+        <button className='submitBtn' onClick={addUser}>Save Profile</button>
+      </form>
+
+      <div className='equipmentListing'>
+        <h1>Current Equipment Listing</h1>
+        <div align="right">Criteria based on currrent profile: </div>
+        <div align="right">Draw: {userDraw} Handedness: {userhandedness}</div>
+        <table>
           <thead>
             <tr>
               <th>Bownumber</th>
@@ -154,37 +150,29 @@ const App = ({ signOut, user }) => {
               <th>Handedness</th>
             </tr>
           </thead>
-        {
-          equipments.map((equipment, index) => (
-            <tbody key={equipment.id ? equipment.id : index}>
-              <tr>
-              <td>{equipment.bownumber}</td>
-              <td>{equipment.bowserialnumber}</td>
-              <td>{equipment.draw}</td>
-              <td>{equipment.handedness}</td>
-              </tr>
-            </tbody>
-          ))
-        }
+          {
+            equipments.map((equipment, index) => (
+              <tbody key={equipment.id ? equipment.id : index}>
+                <tr>
+                  <td>{equipment.bownumber}</td>
+                  <td>{equipment.bowserialnumber}</td>
+                  <td>{equipment.draw}</td>
+                  <td>{equipment.handedness}</td>
+                </tr>
+              </tbody>
+            ))
+          }
         </table>
-        <br></br>
-      <Heading level={3}>Current Active Session</Heading>
-      <p>
-        Sample data from active session
-      </p>
-      <br></br>
-      <p style={styles.footer}>Bowmaster v1</p>
+      </div>
+      <div className='activeSession'>
+        <h1>Current Active Session</h1>
+        <p>
+          Sample data from active session
+        </p>
+      </div>
+      <p className='footer'>Bowmaster v1</p>
     </div>
   );
 }
-
-const styles = {
-  container: { width: 800, margin: '0 auto', display: 'flex',
-flexDirection: 'column', justifyContent: 'center', padding: 20 },
-  button: { backgroundColor: 'red', color: 'white', outline: 'none',
-fontSize: 18, padding: '12px 0px' },
-  footer: { justifyContent: 'center', color: 'grey', fontStyle: 'italic' }
-}
-
 
 export default withAuthenticator(App);
