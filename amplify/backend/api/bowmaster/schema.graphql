@@ -23,6 +23,7 @@ type Session @model {
   id: ID!
   starttime: AWSDateTime
   user: User @belongsTo
+  endtime: AWSDateTime
 }
 
 type Equipment @model {

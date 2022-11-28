@@ -14,6 +14,7 @@ export const getUser = /* GraphQL */ `
         items {
           id
           starttime
+          endtime
           createdAt
           updatedAt
           userSessionsId
@@ -67,6 +68,7 @@ export const getSession = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      endtime
       createdAt
       updatedAt
       userSessionsId
@@ -93,6 +95,7 @@ export const listSessions = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        endtime
         createdAt
         updatedAt
         userSessionsId

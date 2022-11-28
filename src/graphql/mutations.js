@@ -17,6 +17,7 @@ export const createUser = /* GraphQL */ `
         items {
           id
           starttime
+          endtime
           createdAt
           updatedAt
           userSessionsId
@@ -44,6 +45,7 @@ export const updateUser = /* GraphQL */ `
         items {
           id
           starttime
+          endtime
           createdAt
           updatedAt
           userSessionsId
@@ -71,6 +73,7 @@ export const deleteUser = /* GraphQL */ `
         items {
           id
           starttime
+          endtime
           createdAt
           updatedAt
           userSessionsId
@@ -103,6 +106,7 @@ export const createSession = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      endtime
       createdAt
       updatedAt
       userSessionsId
@@ -130,6 +134,7 @@ export const updateSession = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      endtime
       createdAt
       updatedAt
       userSessionsId
@@ -157,6 +162,7 @@ export const deleteSession = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      endtime
       createdAt
       updatedAt
       userSessionsId
