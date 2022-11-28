@@ -5,11 +5,12 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
-import { listEquipment, listUsers } from './graphql/queries'
+import { listEquipment, listUsers, listSessions } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from "./aws-exports";
+import { queries } from '@testing-library/react';
 Amplify.configure(awsExports);
 
 const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', handedness: '' }
@@ -43,6 +44,8 @@ const App = ({ signOut, user }) => {
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
     getEquipment(userRecord.data.listUsers.items[0].draw, userRecord.data.listUsers.items[0].handedness)
+    getUserSessions(userRecord.data.listUsers.items[0].id)
+    getAllSessions()
 
   }
 
@@ -75,13 +78,28 @@ const App = ({ signOut, user }) => {
     }
   }
 
+  async function getUserSessions(userId) {
+    try {
+      const userSessions = await API.graphql(graphqlOperation(listSessions, {filter: { userSessionsId: { eq: userId}}}))
+      console.log("User sessions: ", userSessions)
+    } catch (err) {
+      console.log("Error retrieving user sessions: ", err)
+    }
+  }
 
+  async function getAllSessions() {
+    try {
+      const allSessions = await API.graphql(graphqlOperation(listSessions, {}))
+      console.log('Returned sessions: ', allSessions)
+    } catch (err) {
+      console.log("error retrieving sessions: ", err)
+    }
+  }
 
   const [navbarOpen, setNavbarOpen] = useState(false)
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen)
   }
-
 
 
   return (
