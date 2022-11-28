@@ -13,6 +13,7 @@ import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
 
 const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', handedness: '' }
+var FirstNameVar = ''
 
 const App = ({ signOut, user }) => {
   const [formState, setFormState] = useState(initialUserForm)
@@ -39,6 +40,8 @@ const App = ({ signOut, user }) => {
     const userRecord = await API.graphql(graphqlOperation(listUsers, {filter: { email: { eq: currentUser.attributes.email} } }));
     console.log({userRecord});
     setFirstName(userRecord.data.listUsers.items[0].firstname)
+    FirstNameVar = userRecord.data.listUsers.items[0].firstname
+    
     setLastName(userRecord.data.listUsers.items[0].lastname)
     setUserDraw(userRecord.data.listUsers.items[0].draw)
     setUserHandedness(userRecord.data.listUsers.items[0].handedness)
@@ -48,6 +51,7 @@ const App = ({ signOut, user }) => {
 
   async function getEquipment(draw, handedness) {
     try {
+      console.log(FirstNameVar)
       if (handedness == 'UNKNOWN') {
         const equipmentData = await API.graphql(graphqlOperation(listEquipment, {filter: { draw: { eq: draw}}}))
         const equipments = equipmentData.data.listEquipment.items
