@@ -5,11 +5,12 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import { createUser } from './graphql/mutations';
-import { listEquipment, listUsers } from './graphql/queries'
+import { listEquipment, listUsers, listSessions } from './graphql/queries'
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from "./aws-exports";
+import { queries } from '@testing-library/react';
 Amplify.configure(awsExports);
 
 const initialUserForm = { firstname: '', lastname: '', email: '', draw: '', handedness: '' } // setup fields for user form
@@ -53,6 +54,7 @@ const App = ({ signOut, user }) => {
 
     // call getEquipment() and pass the current user draw and handedness
     getEquipment(userRecord.data.listUsers.items[0].draw, userRecord.data.listUsers.items[0].handedness)
+    setSession(await getSessionForDisplay(userRecord.data.listUsers.items[0].id))
 
   }
 
@@ -98,13 +100,61 @@ const App = ({ signOut, user }) => {
     }
   }
 
+  async function getUserSessions(userId) {
+    try {
+      const userSessions = await API.graphql(graphqlOperation(listSessions, { filter: { userSessionsId: { eq: userId } } }))
+      return userSessions
+    } catch (err) {
+      console.log("Error retrieving user sessions: ", err)
+    }
+  }
 
+  async function getAllSessions() {
+    try {
+      const allSessions = await API.graphql(graphqlOperation(listSessions, {}))
+    } catch (err) {
+      console.log("error retrieving sessions: ", err)
+    }
+  }
+
+  async function getSessionForDisplay(userId) {
+    try {
+      const userSessions = await getUserSessions(userId)
+      const currentTime = new Date().toISOString.valueOf()
+      var currentSession = null
+      var upcomingSession = null
+      userSessions.data.listSessions.items.forEach(session => {
+        if (session.endtime == null) {
+          if (session.starttime.valueOf() >= currentTime) {
+            currentSession = session
+          } else if (session.starttime.valueOf() < currentTime) {
+            if (upcomingSession != null) {
+              if (session.starttime.valueOf() > upcomingSession.starttime.valueOf()) {
+                upcomingSession = session
+              }
+            } else {
+              upcomingSession = session
+            }
+          }
+        }
+      });
+      if (currentSession != null) {
+        return currentSession
+      } else if (upcomingSession != null) {
+        return upcomingSession
+      } else {
+        console.log("couldnt find any sessions!!!")
+        return null
+      }
+    } catch (err) {
+      console.log("error in finding current and upcoming sessions!!!", err)
+    }
+  }
 
   const [navbarOpen, setNavbarOpen] = useState(false)
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen)
   }
-
 
 
   return (
@@ -208,7 +258,12 @@ const App = ({ signOut, user }) => {
       <div className='activeSession'>
         <h1>Current Active Session</h1>
         <p>
-          Sample data from active session
+          {session.starttime >= new Date().toISOString.valueOf()
+            ? <>
+              <div className='currentSession'>Practice started at: {session.starttime}</div>
+            </>
+            : <div className='upcomingSession'>There is no current practice. The next practice will begin at {session.starttime}</div>
+          }
         </p>
       </div>
       <p className='footer'>Bowmaster v1</p>

@@ -115,6 +115,11 @@ th, td {
   margin: 20px 0px;
 }
 
+.upcomingSession {
+  color: red;
+  font-weight: bold;
+}
+
 .footer {
   justify-content: center;
   color: grey;
