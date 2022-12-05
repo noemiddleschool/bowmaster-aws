@@ -79,9 +79,9 @@ const App = ({ signOut, user }) => {
     }
   }
 
+  
   // addUser()
   // Purpose: To create user record using GraphQl API with data obtained by form on website
-
   async function addUser() {
     try {
       // ensure firstname, lastname, and email have data
@@ -100,52 +100,79 @@ const App = ({ signOut, user }) => {
     }
   }
 
+  // getUserSessions()
+  // Purpose: to retrieve session records tied to the currently logged in user based on their userId
   async function getUserSessions(userId) {
     try {
+      //query database for sessions related to the given userId
       const userSessions = await API.graphql(graphqlOperation(listSessions, { filter: { userSessionsId: { eq: userId } } }))
+    
       return userSessions
+    
     } catch (err) {
       console.log("Error retrieving user sessions: ", err)
     }
   }
 
+  // getAllSessions()
+  // Purpose: function used for debugging and verifying session record 
+  //          changes/retrievals from database
   async function getAllSessions() {
     try {
+      //query database for all records in session table
       const allSessions = await API.graphql(graphqlOperation(listSessions, {}))
+
     } catch (err) {
       console.log("error retrieving sessions: ", err)
     }
   }
 
+  // getSessionForDisplay()
+  // Purpose: retrieve current or upcoming session for display on webpage. 
   async function getSessionForDisplay(userId) {
     try {
+      //collect all sessions for the current user and mark the current time
       const userSessions = await getUserSessions(userId)
       const currentTime = new Date().toISOString.valueOf()
+
+      //placeholders for determining active/upcoming session
       var currentSession = null
       var upcomingSession = null
+
+      //determine whether there is a currently active session, or one upcoming
       userSessions.data.listSessions.items.forEach(session => {
+        //if session is incomplete and has already started, then it is a current session
         if (session.endtime == null) {
           if (session.starttime.valueOf() >= currentTime) {
             currentSession = session
+
+            //if the session is incomplete and hasn't started, then it is upcoming
           } else if (session.starttime.valueOf() < currentTime) {
+            //if we already have found an upcoming session, see if replace needed
             if (upcomingSession != null) {
+
+              //if this upcoming session is sooner, replace variable value
               if (session.starttime.valueOf() > upcomingSession.starttime.valueOf()) {
                 upcomingSession = session
               }
+              
             } else {
               upcomingSession = session
             }
           }
         }
       });
+
+      //return either the current session (if exists), or the upcoming one (if found)
       if (currentSession != null) {
         return currentSession
       } else if (upcomingSession != null) {
         return upcomingSession
       } else {
-        console.log("couldnt find any sessions!!!")
+        console.log("couldn't find any current or upcoming sessions!!!")
         return null
       }
+
     } catch (err) {
       console.log("error in finding current and upcoming sessions!!!", err)
     }
